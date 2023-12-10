@@ -112,10 +112,10 @@ class Router:
             delay = self.graph[edge[0]][edge[1]].get('delay', 0)
 
             # Check if delay is zero to avoid potential issues
-            if delay == 0:
-                print(f"Warning: Delay is zero for edge {edge}")
-                print(f"Graph: {self.graph}")
-                return 0  # Return 0 as a default value
+            # if delay == 0:
+                # print(f"Warning: Delay is zero for edge {edge}")
+                # print(f"Graph: {self.graph}")
+                # return 0  # Return 0 as a default value
 
         return sum(self.graph[path[i]][path[i + 1]].get('delay', 0) for i in range(len(path) - 1))
 
