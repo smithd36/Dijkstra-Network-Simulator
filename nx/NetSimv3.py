@@ -89,20 +89,18 @@ class Router:
     def output_bandwidth(self, path):
         # Calculate available bandwidth on the output link of the router
         # For simplicity, this function assumes uniform bandwidth across all links
-        for i in range(len(path)-1):
-            edge = (path[i], path[i+1])
-            if 'bandwidth' not in self.graph[edge[0]][edge[1]]:
-                print(f"Missing 'bandwidth' key for edge {edge}")
-                print(f"Graph: {self.graph}")
-                return 0  # Return 0 as a default value
-    
+        for i in range(len(path) - 1):
+            edge = (path[i], path[i + 1])
+            # Set a default bandwidth value if 'bandwidth' key is missing
+            bandwidth = self.graph[edge[0]][edge[1]].get('bandwidth', 1.0)
+            
             # Check if bandwidth is zero to avoid division by zero
-            if self.graph[edge[0]][edge[1]]['bandwidth'] == 0:
+            if bandwidth == 0:
                 print(f"Warning: Bandwidth is zero for edge {edge}")
                 print(f"Graph: {self.graph}")
                 return 0  # Return 0 as a default value
     
-        return min(self.graph[path[i]][path[i+1]]['bandwidth'] for i in range(len(path)-1))
+        return min(self.graph[path[i]][path[i + 1]].get('bandwidth', 1.0) for i in range(len(path) - 1))
 
 
 
