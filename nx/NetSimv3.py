@@ -81,11 +81,11 @@ class Router:
             packet['transmission_time'] = transmission_time + propagation_delay
 
             # Assuming the packet is successfully transmitted to the next router
-            self.output_queue.append(packet)
+            self.output_queue.append({'packet': packet, 'transmission_time': transmission_time})
 
         # Clear the input queue after servicing
         self.input_queue = []
-
+        
     def output_bandwidth(self, path):
         # Calculate available bandwidth on the output link of the router
         # For simplicity, this function assumes uniform bandwidth across all links
@@ -106,7 +106,19 @@ class Router:
 
     def output_delay(self, path):
         # Calculate total propagation delay along the output link of the router
-        return sum(self.graph[path[i]][path[i+1]]['delay'] for i in range(len(path)-1))
+        for i in range(len(path) - 1):
+            edge = (path[i], path[i + 1])
+            # Set a default delay value if 'delay' key is missing
+            delay = self.graph[edge[0]][edge[1]].get('delay', 0)
+
+            # Check if delay is zero to avoid potential issues
+            if delay == 0:
+                print(f"Warning: Delay is zero for edge {edge}")
+                print(f"Graph: {self.graph}")
+                return 0  # Return 0 as a default value
+
+        return sum(self.graph[path[i]][path[i + 1]].get('delay', 0) for i in range(len(path) - 1))
+
 
 class Simulation:
     def __init__(self, graph, routers, packets):
