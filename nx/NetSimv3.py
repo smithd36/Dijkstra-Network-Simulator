@@ -29,6 +29,11 @@ def generate_network(nodes_count):
         G[u][v]['bandwidth'] = np.random.uniform(0, 1)
         G[u][v]['delay'] = np.random.uniform(1, 10)
 
+    # Initialize 'bandwidth' for all edges
+    for (u, v) in G.edges():
+        if 'bandwidth' not in G[u][v]:
+            G[u][v]['bandwidth'] = 0
+
     return G
 
 def write_to_file(graph, filename):
