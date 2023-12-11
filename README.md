@@ -89,4 +89,8 @@ This repository contains a network simulation program that simulates the transmi
 
 - **Description:** Runs the network simulation.
 - **Parameters:**
+<<<<<<< HEAD
   - `simulation_time` (int): The duration of the simulation in seconds. Default is `1000`.
+=======
+  - `simulation_time` (int): The duration of the simulation in seconds. Default is `1000`.
+>>>>>>> a6a09ad852e60446cf938e3fb355eac7adf1ba2a

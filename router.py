@@ -24,17 +24,17 @@ class Router:
             packet = packet_info['packet']
             path = packet_info['path']
 
-            # Calculate transmission time based on bandwidth
+            # calculate transmission time based on bandwidth
             transmission_time = packet['size'] / self.output_bandwidth(path)
 
-            # Add propagation delay
+            # add propagation delay
             propagation_delay = self.output_delay(path)
 
-            # Update arrival time and transmission time
+            # update arrival time and transmission time
             packet['arrival_time'] = current_time
             packet['transmission_time'] = transmission_time + propagation_delay
 
-            # Assuming the packet is successfully transmitted to the next router
+            # assuming the packet is successfully transmitted to the next router
             self.output_queue.append({'packet': packet, 'transmission_time': transmission_time})
 
         # Clear the input queue after servicing
@@ -46,9 +46,9 @@ class Router:
             edge = (path[i], path[i + 1])
             bandwidth = self.graph[edge[0]][edge[1]].get('bandwidth', 1.0)
             
-            # Check if bandwidth is zero to avoid division by zero
+            # check if bandwidth is zero to avoid division by zero
             if bandwidth == 0:
-                return 0  # Return 0 as a default value
+                return 0  # return 0 as a default value
     
         return min(self.graph[path[i]][path[i + 1]].get('bandwidth', 1.0) for i in range(len(path) - 1))
 
@@ -58,8 +58,8 @@ class Router:
             edge = (path[i], path[i + 1])
             delay = self.graph[edge[0]][edge[1]].get('delay', 0)
             
-            # Check if delay is zero to avoid potential issues
+            # check if delay is zero to avoid potential issues
             if delay == 0:
-                return 0  # Return 0 as a default value
+                return 0  # return 0 as a default value
 
         return sum(self.graph[path[i]][path[i + 1]].get('delay', 0) for i in range(len(path) - 1))

@@ -29,48 +29,48 @@ class NetworkSimulation:
         current_time = 0
 
         while current_time < simulation_time:
-            # Generate packets based on the Poisson distribution
+            # generate packets based on the Poisson distribution
             new_packets = generate_packets(len(self.graph.nodes()))
             self.packets.extend(new_packets)
             self.total_generated_packets += len(new_packets)
 
-            # Send packets through the network
+            # send packets through the network
             for packet in self.packets:
                 source = packet['source']
                 destination = random.choice([node for node in self.graph.nodes() if node != source])
                 path = nx.shortest_path(self.graph, source=source, target=destination)
                 self.routers[source].enqueue_packet({'path': path, 'packet': packet})
 
-            # Service the packets at each router
+            # service the packets at each router
             for router in self.routers.values():
                 router.service_packets(current_time)
 
-            # Update the network state
+            # update the network state
             current_time = time.time() - start_time
 
-        # Calculate statistics
+        # calculate the required statistics
         for router in self.routers.values():
-            # Update completion time
+            # update completion time
             if router.output_queue:
                 completion_time = router.output_queue[-1]['packet']['arrival_time'] + router.output_queue[-1]['transmission_time']
                 self.max_completion_time = max(self.max_completion_time, completion_time)
                 self.min_completion_time = min(self.min_completion_time, completion_time)
 
-            # Update dropped packets count
+            # update dropped packets count
             dropped_packets = len(router.input_queue)
             self.total_dropped_packets += dropped_packets
             self.max_dropped_packets = max(self.max_dropped_packets, dropped_packets)
             self.min_dropped_packets = min(self.min_dropped_packets, dropped_packets)
 
-        # Calculate the percentage of successfully received packets
+        # calculate the percentage of successfully received packets
         self.successfully_transmitted_packets = self.total_generated_packets - self.total_dropped_packets
         success_percentage = (self.successfully_transmitted_packets / self.total_generated_packets) * 100
 
-        # Calculate average packet transmission time
+        # calculate average packet transmission time
         if self.successfully_transmitted_packets > 0:
             self.total_transmission_time /= self.successfully_transmitted_packets
 
-        # Print simulation results
+        # print simulation results
         print("Simulation Results:")
         print(f"Total number of packets generated: {self.total_generated_packets}")
         print(f"Total number of packets successfully transmitted: {self.successfully_transmitted_packets}")
