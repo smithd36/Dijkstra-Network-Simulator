@@ -4,8 +4,11 @@
 import networkx as nx
 import numpy as np
 
-def generate_network(nodes_count):
+def generate_network(nodes_count, seed):
     """Randomly generate a connected graph with bandwidth and delay assigned to links."""
+    # set a seed for reproducability
+    np.random.seed(seed)
+    
     while True:
         G = nx.erdos_renyi_graph(nodes_count, p=0.2)
         if nx.is_connected(G):
