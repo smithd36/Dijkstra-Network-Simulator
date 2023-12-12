@@ -90,3 +90,7 @@ This repository contains a network simulation program that simulates the transmi
 - **Description:** Runs the network simulation.
 - **Parameters:**
   - `simulation_time` (int): The duration of the simulation in seconds. Default is `1000`.
+
+#### display_results()
+- ** Description:** Displays the results of the simulation in a Tkinter window.
+- ** Parameters:** `self` (object): THe instance of the `NetworkSimulation` class.

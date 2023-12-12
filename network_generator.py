@@ -5,7 +5,14 @@ import networkx as nx
 import numpy as np
 
 def generate_network(nodes_count, seed):
-    """Randomly generate a connected graph with bandwidth and delay assigned to links."""
+    """
+    Randomly generates a connected graph with bandwidth and delay assigned to links.
+
+    :param nodes_count: The number of nodes in the generated network.
+    :param seed: Seed for reproducibility of the random graph generation.
+
+    :return: A connected graph (networkx.Graph) with randomly assigned bandwidth and delay to links.
+    """
     # set a seed for reproducability
     np.random.seed(seed)
     
@@ -14,12 +21,12 @@ def generate_network(nodes_count, seed):
         if nx.is_connected(G):
             break
 
-    # Assign bandwidth and delay to the links
+    # assign bandwidth and delay to the links
     for (u, v) in G.edges():
         G[u][v]['bandwidth'] = np.random.uniform(0, 1)
         G[u][v]['delay'] = np.random.uniform(1, 10)
 
-    # Initialize 'bandwidth' for all edges
+    # initalize 'bandwidth' for all edges
     for (u, v) in G.edges():
         if 'bandwidth' not in G[u][v]:
             G[u][v]['bandwidth'] = 0

@@ -6,7 +6,13 @@ import numpy as np
 class Router:
     """Class representing the router with a graph, max queue size and service rate."""
     def __init__(self, graph, max_queue_size=30, service_rate=1.0):
-        """Initialize a router with a graph, maximum queue size, and service rate."""
+        """
+        Initialize a router with a graph, maximum queue size, and service rate.
+
+        :param graph: The network graph representing connectivity between routers.
+        :param max_queue_size: Maximum size of the input queue for the router.
+        :param service_rate: The rate at which the router can process packets.
+        """
         self.graph = graph
         self.input_queue = []
         self.output_queue = []
@@ -14,12 +20,20 @@ class Router:
         self.service_rate = service_rate
 
     def enqueue_packet(self, packet):
-        """Queue a packet in the input queue if space is available."""
+        """
+        Queue a packet in the input queue if space is available.
+
+        :param packet: The packet to be enqueued, represented as a dictionary.
+        """
         if len(self.input_queue) < self.max_queue_size:
             self.input_queue.append(packet)
 
     def service_packets(self, current_time):
-        """Service packets in the input queue, updating transmission times."""
+        """
+        Service packets in the input queue, updating transmission times.
+
+        :param current_time: The current time in the simulation.
+        """        
         for packet_info in self.input_queue:
             packet = packet_info['packet']
             path = packet_info['path']
@@ -37,11 +51,16 @@ class Router:
             # assuming the packet is successfully transmitted to the next router
             self.output_queue.append({'packet': packet, 'transmission_time': transmission_time})
 
-        # Clear the input queue after servicing
+        # empty input queue after servicing
         self.input_queue = []
 
     def output_bandwidth(self, path):
-        """Calculate available bandwidth on the output link of the router."""
+        """
+        Calculate available bandwidth on the output link of the router.
+
+        :param path: The path of the packet through the network.
+        :return: The available bandwidth on the output link.
+        """        
         for i in range(len(path) - 1):
             edge = (path[i], path[i + 1])
             bandwidth = self.graph[edge[0]][edge[1]].get('bandwidth', 1.0)
@@ -53,7 +72,12 @@ class Router:
         return min(self.graph[path[i]][path[i + 1]].get('bandwidth', 1.0) for i in range(len(path) - 1))
 
     def output_delay(self, path):
-        """Calculate total propagation delay along the output link of the router."""
+        """
+        Calculate total propagation delay along the output link of the router.
+
+        :param path: The path of the packet through the network.
+        :return: The total propagation delay along the output link.
+        """        
         for i in range(len(path) - 1):
             edge = (path[i], path[i + 1])
             delay = self.graph[edge[0]][edge[1]].get('delay', 0)

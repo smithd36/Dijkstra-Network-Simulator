@@ -17,7 +17,7 @@ def main():
         seed = int(sys.argv[1])
         filename = None
     else:
-        # impropor invocation from command line
+        # improper invocation from command line
         print("Usage:\npython3 main.py <seed> [<graph_filename.txt>]\nOR\npython3 main.py <seed>")
         sys.exit(1)
 
@@ -37,7 +37,7 @@ def main():
     simulation = NetworkSimulation(graph, routers, packets)
 
     # run the simulation
-    simulation.simulate(simulation_time=10)
+    simulation.simulate(simulation_time=1000)
 
 if __name__ == "__main__":
     main()
