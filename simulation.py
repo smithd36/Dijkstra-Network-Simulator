@@ -43,23 +43,26 @@ class NetworkSimulation:
         """Display simulation results in a Tkinter window."""
         if self.results_window is None:
             self.results_window = tk.Tk()
-            self.results_window.title("Simulation Results")
+            self.results_window.title("Network Simulation Results")
 
-            # adjust width and height as needed
-            self.results_text = scrolledtext.ScrolledText(self.results_window, wrap=tk.WORD, width=70, height=30)
-            self.results_text.pack()
+            # create a frame to organize the information
+            frame = tk.Frame(self.results_window)
+            frame.pack(padx=10, pady=10)
 
-        self.results_text.delete('1.0', tk.END)
-        self.results_text.insert(tk.END, "Simulation Results:\n")
-        self.results_text.insert(tk.END, f"Total number of packets generated: {self.total_generated_packets}\n")
-        self.results_text.insert(tk.END, f"Total number of packets successfully transmitted: {self.successfully_transmitted_packets}\n")
-        self.results_text.insert(tk.END, f"Percentage of successfully received packets: {self.success_percentage:.2f}%\n")
-        self.results_text.insert(tk.END, f"Average packet transmission time: {self.total_transmission_time:.2f} seconds\n")
-        self.results_text.insert(tk.END, f"Maximum completion time for transmissions: {self.max_completion_time:.2f} seconds\n")
-        self.results_text.insert(tk.END, f"Minimum completion time for transmissions: {self.min_completion_time:.2f} seconds\n")
-        self.results_text.insert(tk.END, f"Maximum number of packets dropped at a router: {self.max_dropped_packets}\n")
-        self.results_text.insert(tk.END, f"Minimum number of packets dropped at a router: {self.min_dropped_packets}\n")
-        self.results_text.insert(tk.END, f"Average number of packets dropped at a router: {self.avg_dropped_packets:.2f}\n")
+            # labels and values for simulation results
+            labels = ["Total Packets Generated", "Successfully Transmitted Packets", "Success Percentage",
+                    "Average Transmission Time", "Max Completion Time", "Min Completion Time",
+                    "Max Dropped Packets", "Min Dropped Packets", "Avg Dropped Packets"]
+
+            values = [self.total_generated_packets, self.successfully_transmitted_packets,
+                  f"{self.success_percentage:.2f}%", f"{self.total_transmission_time:.2f} seconds",
+                  f"{self.max_completion_time:.2f} seconds", f"{self.min_completion_time:.2f} seconds",
+                  self.max_dropped_packets, self.min_dropped_packets, f"{self.avg_dropped_packets:.2f}"]
+
+            # add labels and values in a grid layout
+            for i, label in enumerate(labels):
+                tk.Label(frame, text=label, font=("Helvetica", 10, "bold")).grid(row=i, column=0, sticky="w", padx=5, pady=5)
+                tk.Label(frame, text=str(values[i]), font=("Helvetica", 10)).grid(row=i, column=1, sticky="w", padx=5, pady=5)
 
         self.results_window.mainloop()
 
