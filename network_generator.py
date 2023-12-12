@@ -5,6 +5,7 @@ import networkx as nx
 import numpy as np
 
 def generate_network(nodes_count, seed):
+<<<<<<< HEAD
     """
     Randomly generates a connected graph with bandwidth and delay assigned to links.
 
@@ -13,6 +14,9 @@ def generate_network(nodes_count, seed):
 
     :return: A connected graph (networkx.Graph) with randomly assigned bandwidth and delay to links.
     """
+=======
+    """Randomly generate a connected graph with bandwidth and delay assigned to links."""
+>>>>>>> 71ec412572f873ebd92a6226713b4acc7c8f72a6
     # set a seed for reproducability
     np.random.seed(seed)
     

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 networkx==3.2.1
 numpy==1.26.2
 networkx==3.2.1
 numpy==1.26.2
 tk==0.1.0
+=======
+networkx==3.2.1
+numpy==1.26.2
+>>>>>>> 71ec412572f873ebd92a6226713b4acc7c8f72a6
