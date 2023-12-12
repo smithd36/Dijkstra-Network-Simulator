@@ -6,11 +6,19 @@ import random
 from router import Router
 from packet_generator import generate_packets
 import networkx as nx
+import tkinter as tk
+from tkinter import scrolledtext
 
 class NetworkSimulation:
     """Class represents the simulation of the network with a graph, routers and packets."""
     def __init__(self, graph, routers, packets):
-        """Initialize the simulation with a graph, routers, and packets."""
+        """
+        Initialize the simulation with a graph, routers, and packets.
+
+        :param graph: The network graph representing connectivity between routers.
+        :param routers: Dictionary of routers in the network.
+        :param packets: List of packets to be simulated in the network.
+        """        
         self.graph = graph
         self.routers = routers
         self.packets = packets
@@ -23,8 +31,47 @@ class NetworkSimulation:
         self.max_dropped_packets = 0
         self.min_dropped_packets = float('inf')
 
+        # other attributes for simulation stats
+        self.success_percentage = 0
+        self.avg_dropped_packets = 0
+
+        # set state for Tkinter window
+        self.results_window = None
+        self.results_text = None
+
+    def display_results(self):
+        """Display simulation results in a Tkinter window."""
+        if self.results_window is None:
+            self.results_window = tk.Tk()
+            self.results_window.title("Network Simulation Results")
+
+            # create a frame to organize the information
+            frame = tk.Frame(self.results_window)
+            frame.pack(padx=10, pady=10)
+
+            # labels and values for simulation results
+            labels = ["Total Packets Generated", "Successfully Transmitted Packets", "Success Percentage",
+                    "Average Transmission Time", "Max Completion Time", "Min Completion Time",
+                    "Max Dropped Packets", "Min Dropped Packets", "Avg Dropped Packets"]
+
+            values = [self.total_generated_packets, self.successfully_transmitted_packets,
+                  f"{self.success_percentage:.2f}%", f"{self.total_transmission_time:.2f} seconds",
+                  f"{self.max_completion_time:.2f} seconds", f"{self.min_completion_time:.2f} seconds",
+                  self.max_dropped_packets, self.min_dropped_packets, f"{self.avg_dropped_packets:.2f}"]
+
+            # add labels and values in a grid layout
+            for i, label in enumerate(labels):
+                tk.Label(frame, text=label, font=("Helvetica", 10, "bold")).grid(row=i, column=0, sticky="w", padx=5, pady=5)
+                tk.Label(frame, text=str(values[i]), font=("Helvetica", 10)).grid(row=i, column=1, sticky="w", padx=5, pady=5)
+
+        self.results_window.mainloop()
+
     def simulate(self, simulation_time=1000):
-        """Run the simulation for a specified duration."""
+        """
+        Run the simulation for a specified duration.
+
+        :param simulation_time: The duration of the simulation in seconds.
+        """ 
         start_time = time.time()
         current_time = 0
 
@@ -70,14 +117,5 @@ class NetworkSimulation:
         if self.successfully_transmitted_packets > 0:
             self.total_transmission_time /= self.successfully_transmitted_packets
 
-        # print simulation results
-        print("Simulation Results:")
-        print(f"Total number of packets generated: {self.total_generated_packets}")
-        print(f"Total number of packets successfully transmitted: {self.successfully_transmitted_packets}")
-        print(f"Percentage of successfully received packets: {success_percentage:.2f}%")
-        print(f"Average packet transmission time: {self.total_transmission_time:.2f} seconds")
-        print(f"Maximum completion time for transmissions: {self.max_completion_time:.2f} seconds")
-        print(f"Minimum completion time for transmissions: {self.min_completion_time:.2f} seconds")
-        print(f"Maximum number of packets dropped at a router: {self.max_dropped_packets}")
-        print(f"Minimum number of packets dropped at a router: {self.min_dropped_packets}")
-        print(f"Average number of packets dropped at a router: {self.total_dropped_packets / len(self.routers):.2f}")
+        # show results in window
+        self.display_results()

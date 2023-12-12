@@ -1,7 +1,10 @@
 # Network Simulation
 
+A Python implementation of a discrete evene network simulator, developed for the semester project of the course CS 440: Computer Networks. The simulator models the functioning of a computer network, including node connectivity, link properties, packet generation, queuing, and routing.
+
 This repository contains a network simulation program that simulates the transmission of packets through a network of routers. The simulation is designed to model various aspects of network communication, including bandwidth, delay, and packet transmission.
 
+# Project Structure
 ## Classes and Methods
 
 ### 1. `file_handler.py`
@@ -89,8 +92,47 @@ This repository contains a network simulation program that simulates the transmi
 
 - **Description:** Runs the network simulation.
 - **Parameters:**
-<<<<<<< HEAD
   - `simulation_time` (int): The duration of the simulation in seconds. Default is `1000`.
-=======
-  - `simulation_time` (int): The duration of the simulation in seconds. Default is `1000`.
->>>>>>> a6a09ad852e60446cf938e3fb355eac7adf1ba2a
+
+#### `display_results()`
+- ** Description:** Displays the results of the simulation in a Tkinter window.
+- ** Parameters:** `self` (object): THe instance of the `NetworkSimulation` class.
+
+
+## Installation and Dependencies
+
+### 1. Prerequisits
+Before installing and running the network simulator, make sure you are running Python 3.11.3.
+
+### 2. Installation
+Extract the contents of the zip file to a directory of your choice. Then, navigate to the directory in a terminal and run the following command to install the required dependencies:
+- `pip install -r requirements.txt`
+
+### 3. Usage
+There are 2 ways to use the network simulator:
+### 1. Network Generation
+Run the following command to generate a network graph and check for connectivity:
+`python3 main.py <seed>`
+- `<seed>`: The seed value for random number generation.
+
+### 2. Network Simulation
+Run the following command to simulate the network that exists in a <b>.txt</b> file:
+- `python3 main.py <seed> <graph_filename.txt>`
+
+## Simulation Results
+After running the simulation, these statistics will be displayed in a Tkinter Window:
+- Total Packets Generated
+- Successfully Transmitted Packets
+- Success Percentage
+- Average Transmission Time
+- Max Completion tome
+- Min Completion Time
+- Max Dropped Packets
+- Min Dropped Packets
+- Avg Dropped Packets
+
+<img src="https://github.com/smithd36/DiscreteEvent-NetSim/assets/90289165/e6ba53ee-e0d1-46bd-8e45-0ddb551b77a3"/>
+
+## Team Members/Contributors
+- Drey Smith
+- Ghaith Ishaq
