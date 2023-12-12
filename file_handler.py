@@ -6,16 +6,12 @@ Authors: Ghaith Ishaq, Drey Smith
 import networkx as nx
 
 def read_from_file(filename):
-<<<<<<< HEAD
     """
     Read network information from a file and return a NetworkX graph.
 
     :param filename: The name of the file to read network information from.
     :return: A NetworkX graph representing the network.
     """    
-=======
-    """Read network information from a file and return a NetworkX graph."""
->>>>>>> 71ec412572f873ebd92a6226713b4acc7c8f72a6
     # read the network in from network.txt
     with open(filename, 'r') as file:
         lines = file.readlines()

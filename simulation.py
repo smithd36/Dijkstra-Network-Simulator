@@ -114,19 +114,5 @@ class NetworkSimulation:
         if self.successfully_transmitted_packets > 0:
             self.total_transmission_time /= self.successfully_transmitted_packets
 
-<<<<<<< HEAD
         # show results in window
         self.display_results()
-=======
-        # print simulation results
-        print("Simulation Results:")
-        print(f"Total number of packets generated: {self.total_generated_packets}")
-        print(f"Total number of packets successfully transmitted: {self.successfully_transmitted_packets}")
-        print(f"Percentage of successfully received packets: {success_percentage:.2f}%")
-        print(f"Average packet transmission time: {self.total_transmission_time:.2f} seconds")
-        print(f"Maximum completion time for transmissions: {self.max_completion_time:.2f} seconds")
-        print(f"Minimum completion time for transmissions: {self.min_completion_time:.2f} seconds")
-        print(f"Maximum number of packets dropped at a router: {self.max_dropped_packets}")
-        print(f"Minimum number of packets dropped at a router: {self.min_dropped_packets}")
-        print(f"Average number of packets dropped at a router: {self.total_dropped_packets / len(self.routers):.2f}")
->>>>>>> 71ec412572f873ebd92a6226713b4acc7c8f72a6
