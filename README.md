@@ -99,16 +99,16 @@ This repository contains a network simulation program that simulates the transmi
 - ** Parameters:** `self` (object): THe instance of the `NetworkSimulation` class.
 
 
-## Installation and Dependencies
+## Dependencies and How to Run
 
-### 1. Prerequisits
+### 1. Prerequisites
 Before installing and running the network simulator, make sure you are running Python 3.11.3.
 
-### 2. Installation
+### 2. Dependencies
 Extract the contents of the zip file to a directory of your choice. Then, navigate to the directory in a terminal and run the following command to install the required dependencies:
 - `pip install -r requirements.txt`
 
-### 3. Usage
+### 3. Run
 There are 2 ways to use the network simulator:
 ### 1. Network Generation
 Run the following command to generate a network graph and check for connectivity:
