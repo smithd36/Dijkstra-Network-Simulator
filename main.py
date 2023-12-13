@@ -37,7 +37,7 @@ def main():
     simulation = NetworkSimulation(graph, routers, packets)
 
     # run the simulation
-    simulation.simulate(simulation_time=10)
+    simulation.simulate(simulation_time=1000)
 
 if __name__ == "__main__":
     main()
