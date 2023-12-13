@@ -1,8 +1,21 @@
 # Network Simulation
 
-A Python implementation of a discrete evene network simulator, developed for the semester project of the course CS 440: Computer Networks. The simulator models the functioning of a computer network, including node connectivity, link properties, packet generation, queuing, and routing.
+A Python implementation of a discrete event network simulator, developed for the semester project of the course CS 440: Computer Networks. The simulator models the functioning of a computer network, including node connectivity, link properties, packet generation, queuing, and routing.
 
 This repository contains a network simulation program that simulates the transmission of packets through a network of routers. The simulation is designed to model various aspects of network communication, including bandwidth, delay, and packet transmission.
+
+## Table of Contents
+- [Project Structure](#project-structure)
+  - [Classes and Methods](#classes-and-methods)
+    - [1. `file_handler.py`](#1-file_handlerpy)
+    - [2. `network_generator.py`](#2-network_generatorpy)
+    - [3. `packet_generator.py`](#3-packet_generatorpy)
+    - [4. `router.py`](#4-routerpy)
+    - [5. `simulation.py`](#5-simulationpy)
+- [Dependencies and How to Run](#dependencies-and-how-to-run)
+- [Simulation Duration](#simulation-duration)
+- [Simulation Results](#simulation-results)
+- [Team Members/Contributors](#team-memberscontributors)
 
 # Project Structure
 ## Classes and Methods
@@ -95,9 +108,8 @@ This repository contains a network simulation program that simulates the transmi
   - `simulation_time` (int): The duration of the simulation in seconds. Default is `1000`.
 
 #### `display_results()`
-- ** Description:** Displays the results of the simulation in a Tkinter window.
-- ** Parameters:** `self` (object): THe instance of the `NetworkSimulation` class.
-
+- **Description:** Displays the results of the simulation in a Tkinter window.
+- **Parameters:** `self` (object): The instance of the `NetworkSimulation` class.
 
 ## Dependencies and How to Run
 
@@ -110,6 +122,7 @@ Extract the contents of the zip file to a directory of your choice. Then, naviga
 
 ### 3. Run
 There are 2 ways to use the network simulator:
+
 ### 1. Network Generation
 Run the following command to generate a network graph and check for connectivity:
 `python3 main.py <seed>`
@@ -119,13 +132,45 @@ Run the following command to generate a network graph and check for connectivity
 Run the following command to simulate the network that exists in a <b>.txt</b> file:
 - `python3 main.py <seed> <graph_filename.txt>`
 
+## Simulation Duration
+
+You can adjust the duration of the network simulation by modifying the `simulation_time` parameter in the `main.py` file. Follow these steps to change the simulation time:
+
+1. Open the `main.py` file in a text editor of your choice.
+
+2. Locate the following section of the code:
+
+    ```python
+    # main.py
+    # Authors: Ghaith Ishaq, Drey Smith
+
+    # ... (other imports and code)
+
+    # create a new simulation
+    simulation = NetworkSimulation(graph, routers, packets)
+
+    # run the simulation
+    (LINE 40):simulation.simulate(simulation_time=1000)
+    ```
+
+3. Update the `simulation_time` parameter in line 40 with the desired duration in seconds. For example, to simulate the network for 20 seconds, change the line to:
+
+    ```python
+    simulation.simulate(simulation_time=20)
+    ```
+
+4. Save the changes to the `main.py` file.
+
+Now, when you run the simulation using `python3 main.py <seed> [<graph_filename.txt>]` or `python3 main.py <seed>`, it will use the specified simulation time. Adjusting this parameter allows you to control the duration of the network simulation.
+
 ## Simulation Results
+
 After running the simulation, these statistics will be displayed in a Tkinter Window:
 - Total Packets Generated
 - Successfully Transmitted Packets
 - Success Percentage
 - Average Transmission Time
-- Max Completion tome
+- Max Completion time
 - Min Completion Time
 - Max Dropped Packets
 - Min Dropped Packets
@@ -133,6 +178,6 @@ After running the simulation, these statistics will be displayed in a Tkinter Wi
 
 <img src="https://github.com/smithd36/DiscreteEvent-NetSim/assets/90289165/e6ba53ee-e0d1-46bd-8e45-0ddb551b77a3"/>
 
-## Team Members/Contributors
+### 3. Team Members/Contributors
 - Drey Smith
 - Ghaith Ishaq
